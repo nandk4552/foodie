@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    min-height: 100vh;
+}
+#wrapper {
+    padding: 1%;
+    width: 80%;
+    margin: 0 auto;
+}
+#col-4 {
+    width: 20%;
+    background: white !important;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+}
+#main-content {
+    background: #f1f2f6 !important;
+
+}
+
+#clear-fix {
+    float: none;
+    clear: both;
+}
+.tbl-full {
+    width: 100%;
+}
+table tr th {
+    border-bottom: 1px solid #ccc;
+    padding: 1%;
+}
+table tr td {
+    padding: 1%;
+}

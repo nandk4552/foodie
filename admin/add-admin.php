@@ -1,6 +1,16 @@
 <?php
 include('partials/_header.php');
 ?>
+<?php
+// <!-- checking whether the session is set or not -->
+session_start();
+if (isset($_SESSION['add'])) {
+    // Displaying session message if set
+    echo $_SESSION['add'];
+    // Remove session message
+    unset($_SESSION['add']);
+}
+?>
 
 <!-- logic part -->
 <?php
@@ -8,7 +18,6 @@ include('partials/_header.php');
 
 // check whether the submit button is clicked or not
 
-session_start();
 if (isset($_POST['submit'])) {
     // buttom clicked 
     // echo "Button clicked";
@@ -39,7 +48,7 @@ if (isset($_POST['submit'])) {
 
 
         // Redirecting page to Manage admin page
-        header("location: " . SITEURL . 'admin/manage-admin.php');
+        header("location: " . SITEURL .  'admin/manage-admin.php');
     } else {
         // Failed to inserted into DB
         // echo "Failed to inserted";
@@ -65,6 +74,8 @@ if (isset($_POST['submit'])) {
 
     <div id="wrapper">
         <h1 class="text-center py-3">Add Admin</h1>
+
+
 
         <form action="/rcw/admin/add-admin.php" method="post">
             <div class="mb-3">

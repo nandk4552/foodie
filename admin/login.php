@@ -81,7 +81,7 @@ include('partials/_dbconnect.php');
             // user Available and Login Success 
             // create a variable to display Message
             $_SESSION['login'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>Success!</strong> Login successfull.
+                                    <strong>Success!</strong> Login successful.
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                                 ';
@@ -91,7 +91,7 @@ include('partials/_dbconnect.php');
 
 
             // Redirecting to  Home Page or DashBoard page
-            header("location: " . SITEURL .  'admin/');
+            header("location: " . SITEURL . 'admin/');
         } else {
             // User Not Available and Login Faile Message
 

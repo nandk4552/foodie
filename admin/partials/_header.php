@@ -1,5 +1,7 @@
 <?php
-    include('partials/_dbconnect.php');
+    include('_dbconnect.php');
+    // to handle login authorize login
+    include('_handleLogin.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,6 +43,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="manage-order.php">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-light" href="logout.php">Logout</a>
                     </li>
 
                 </ul>

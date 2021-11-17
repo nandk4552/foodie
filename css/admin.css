@@ -37,3 +37,8 @@ table tr th {
 table tr td {
     padding: 1%;
 }
+
+/* login form */
+.form-floating {
+    width: 350px;
+}

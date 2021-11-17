@@ -4,22 +4,54 @@ include('partials/_header.php');
 
 <!-- display message -->
 <?php
-include 'partials/_dbconect.php';
+include 'partials/_dbconnect.php';
 
 session_start();
+// checking session set for add
 if (isset($_SESSION['add'])) {
     // Displaying message
     echo $_SESSION['add'];
     // removing after showing message once
     unset($_SESSION['add']);
 }
-
+// checking session set for delete
 if (isset($_SESSION['delete'])) {
     // Displaying message
     echo $_SESSION['delete'];
     // removing after showing message once
     unset($_SESSION['delete']);
 }
+// checking session set for update
+if (isset($_SESSION['update'])) {
+    // Displaying message
+    echo $_SESSION['update'];
+    // removing after showing message once
+    unset($_SESSION['update']);
+}
+
+// checking session set for user not found
+if (isset($_SESSION['user-not-found'])) {
+    // Displaying message
+    echo $_SESSION['user-not-found'];
+    // removing after showing message once
+    unset($_SESSION['user-not-found']);
+}
+// checking session set for password not Match
+if (isset($_SESSION['pass-not-match'])) {
+    // Displaying message
+    echo $_SESSION['pass-not-match'];
+    // removing after showing message once
+    unset($_SESSION['pass-not-match']);
+}
+
+// checking session set for change password
+if (isset($_SESSION['change-pass'])) {
+    // Displaying message
+    echo $_SESSION['change-pass'];
+    // removing after showing message once
+    unset($_SESSION['change-pass']);
+}
+
 ?>
 
 
@@ -49,7 +81,7 @@ if (isset($_SESSION['delete'])) {
                 if ($result == true) {
                     // count the rows to check whether we have data in database table of admin users
                     $count = mysqli_num_rows($result); // Function to get all the rows in the database
-                    
+
                     $sno = 0; // Creatinga variable and Assign the value
 
                     // Check the no of rows
@@ -68,21 +100,16 @@ if (isset($_SESSION['delete'])) {
                             // Display the values in our Tables.
                             echo '
                             <tr>
-                                <td>'.$sno.'.</td>
-                                <td>'.$full_name.'</td>
-                                <td>'.$username.'</td>
+                                <td>' . $sno . '.</td>
+                                <td>' . $full_name . '</td>
+                                <td>' . $username . '</td>
                                 <td>
-                                    <a href="#" class="btn btn-success btn-sm">Update Admin</a>
-                                    <a href="'.SITEURL.''."admin/delete-admin.php?id=$id".'" class="btn btn-danger btn-sm">Delete Admin</a>
+                                    <a href="' . SITEURL . '' . "admin/update-password.php?id=$id" . '" class="btn btn-primary btn-sm">Change Password</a>
+                                    <a href="' . SITEURL . '' . "admin/update-admin.php?id=$id" . '" class="btn btn-success btn-sm">Update Admin</a>
+                                    <a href="' . SITEURL . '' . "admin/delete-admin.php?id=$id" . '" class="btn btn-danger btn-sm">Delete Admin</a>
                                 </td>
                             </tr>
                             ';
-                
-
-
-
-
-
                         }
                     } else {
                         // we don't have data in database

@@ -1,6 +1,6 @@
 <?php
 // Database Connection
-include 'partials/_dbconect.php';
+include 'partials/_dbconnect.php';
 
 // 1. get the ID of the admin to be deleted
 $id = $_GET['id'];

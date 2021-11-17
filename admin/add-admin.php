@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     // buttom clicked 
     // echo "Button clicked";
     // connection with db
-    include 'partials/_dbconect.php';
+    include 'partials/_dbconnect.php';
 
     //1. get the data from form
     $full_name = $_POST['full_name'];

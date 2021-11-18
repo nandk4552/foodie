@@ -62,7 +62,7 @@ if (isset($_SESSION['failed-remove'])) {
             <!-- add category section starts -->
             <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn btn-primary btn-sm">Add Category</a>
 
-            <table class="tbl-full my-2">
+            <table class="tbl-full my-2" id="myTable">
                 <tr>
                     <th>sno</th>
                     <th>Title</th>

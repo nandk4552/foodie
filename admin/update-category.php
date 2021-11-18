@@ -1,6 +1,6 @@
 <?php
-include('partials/_header.php');
 include('partials/_dbconnect.php');
+include('partials/_header.php');
 ?>
 
 
@@ -37,7 +37,6 @@ include('partials/_dbconnect.php');
                     $current_image = $row['image_name'];
                     $featured = $row['featured'];
                     $active = $row['active'];
-
                 } else {
                     // Redirect the user with Session message
                     $_SESSION['no-category-found'] = '
@@ -47,10 +46,8 @@ include('partials/_dbconnect.php');
                     </div>
                     ';
 
-                    header("Location: ".SITEURL."admin/manage-category.php");
+                    header("Location: " . SITEURL . "admin/manage-category.php");
                     exit;
-
-
                 }
             } else {
                 // redirect to manage category page
@@ -73,13 +70,17 @@ include('partials/_dbconnect.php');
                     <label for="exampleInputEmail1" class="form-label">Featured: </label>
                     <div class="form-check">
 
-                        <input <?php if($featured == "Yes"){echo "checked";} ?> class="form-check-input mx-1" name="featured" type="radio" value="Yes" id="featured">
+                        <input <?php if ($featured == "Yes") {
+                                    echo "checked";
+                                } ?> class="form-check-input mx-1" name="featured" type="radio" value="Yes" id="featured">
                         <label class="form-check-label" for="featured">
                             Yes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input <?php if($featured == "No"){echo "checked";} ?> class="form-check-input mx-2" type="radio" name="featured" value="No" id="featured" >
+                        <input <?php if ($featured == "No") {
+                                    echo "checked";
+                                } ?> class="form-check-input mx-2" type="radio" name="featured" value="No" id="featured">
                         <label class="form-check-label" for="featured">
                             No
                         </label>
@@ -90,13 +91,17 @@ include('partials/_dbconnect.php');
                     <label for="exampleInputEmail1" class="form-label">Active: </label>
                     <div class="form-check">
 
-                        <input <?php if($active == "Yes"){echo "checked";} ?>   class="form-check-input mx-1" type="radio" name="active" value="Yes" id="active">
+                        <input <?php if ($active == "Yes") {
+                                    echo "checked";
+                                } ?> class="form-check-input mx-1" type="radio" name="active" value="Yes" id="active">
                         <label class="form-check-label" for="active">
                             Yes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input <?php if($active == "No"){echo "checked";} ?>  class="form-check-input mx-2" type="radio" name="active" value="No" id="active" >
+                        <input <?php if ($active == "No") {
+                                    echo "checked";
+                                } ?> class="form-check-input mx-2" type="radio" name="active" value="No" id="active">
                         <label class="form-check-label" for="active">
                             No
                         </label>
@@ -107,16 +112,15 @@ include('partials/_dbconnect.php');
                     <label for="image" class="form-label">Current Image </label>
                     <div>
                         <?php
-                            if($current_image != "") {
-                                // Display the image
-                                ?>
-                                <img src="<?php echo SITEURL;?>images/category/<?php echo $current_image;?>" alt="image Can't Preview right now" width="100px">
-                                <?php
-                            }
-                            else {
-                                // Display the message
-                                echo '<div class="text-danger">Image Not Added</div>';
-                            }
+                        if ($current_image != "") {
+                            // Display the image
+                        ?>
+                            <img src="<?php echo SITEURL; ?>images/category/<?php echo $current_image; ?>" alt="image Can't Preview right now" width="100px">
+                        <?php
+                        } else {
+                            // Display the message
+                            echo '<div class="text-danger">Image Not Added</div>';
+                        }
                         ?>
                     </div>
 
@@ -126,7 +130,7 @@ include('partials/_dbconnect.php');
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Select New Image </label>
-                    <input type="file" class="form-control" name="image" id="image" aria-label="file example" >
+                    <input type="file" class="form-control" name="image" id="image" aria-label="file example">
                     <div class="invalid-feedback">Invalid Field</div>
                 </div>
 
@@ -142,17 +146,83 @@ include('partials/_dbconnect.php');
 
 
 <?php
-   if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     //    echo "Clicked";
     // 1.Get all the data from form
 
     $id = $_POST['id'];
     $title = $_POST['title'];
     $current_image = $_POST['current_image'];
-    $featured = $_POST['featured'];    
-    $active = $_POST['active'];    
+    $featured = $_POST['featured'];
+    $active = $_POST['active'];
 
     // 2. Update New Image if Selected 
+    // Check whether the image is selected or not
+    if (isset($_FILES['image']['name'])) {
+        // Get the Image Details
+        $image_name = $_FILES['image']['name'];
+
+        // check whether the image name is available or not
+        if ($image_name != "") {
+            // Image Available
+            //A. Upload the new Image
+
+
+            // Auto rename the image
+            $ext = end(explode('.', $image_name));
+
+            // Rename the image
+            $image_name = "Food_Category_" . rand(0000, 9999) . '.' . $ext;
+
+
+            $source_path = $_FILES['image']['tmp_name'];
+            $destination_path = "../images/category/" . $image_name;
+
+            // Finally upload the image
+            $upload = move_uploaded_file($source_path, $destination_path);
+
+            // check whether the image is uploaded or not
+            // And if the image is not uploaded then we will stop the process redirect the user with error message
+            if ($upload == false) {
+                // Set sesssion message
+                session_start();
+                $_SESSION['upload'] = '
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong> Image Failed to Upload.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    ';
+                // Redirect the user to manage category page
+                header("Location: " . SITEURL . "admin/manage-category.php");
+                exit;
+            }
+
+            //B. Remove the Current Image If available
+            if ($current_image != "") {
+
+
+                $remove_path = "../images/category/" . $current_image;
+                $remove = unlink($remove_path);
+
+                // Check whether the image is removed or not
+                // If failed to remove then display message and stop the process
+                if ($remove == false) {
+                    // Failed to remove image
+                    $_SESSION['failed-remove'] = '
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">   
+                        <strong>Error!</strong> Failed to remove the current Image.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>   ';
+                    header("location: " . SITEURL .  'admin/manage-category.php');
+                    die();
+                }
+            }
+        } else {
+            $image_name = $current_image;
+        }
+    } else {
+        $image_name = $current_image;
+    }
 
     // 3. Update the Database
     $sql2 = "UPDATE tbl_category SET
@@ -166,7 +236,7 @@ include('partials/_dbconnect.php');
     $result2 = mysqli_query($conn, $sql2);
 
     // 4. Redirect the user to Manage Category Page
-    if($result2==true) {
+    if ($result2 == true) {
         // Category Updated
         $_SESSION['update-category'] = '
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -174,10 +244,9 @@ include('partials/_dbconnect.php');
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         ';
-        header("Location: ".SITEURL."admin/manage-category.php");
+        header("Location: " . SITEURL . "admin/manage-category.php");
         exit;
-    }
-    else {
+    } else {
         // Failed to Update Category
         $_SESSION['update-category'] = '
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -185,11 +254,9 @@ include('partials/_dbconnect.php');
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         ';
-        header("Location: ".SITEURL."admin/manage-category.php");
+        header("Location: " . SITEURL . "admin/manage-category.php");
         exit;
-
     }
- 
 }
 ?>
 

@@ -37,6 +37,18 @@ if (isset($_SESSION['update-category'])) {
     // removing after showing message once
     unset($_SESSION['update-category']);
 }
+if (isset($_SESSION['upload'])) {
+    // Displaying message
+    echo $_SESSION['upload'];
+    // removing after showing message once
+    unset($_SESSION['upload']);
+}
+if (isset($_SESSION['failed-remove'])) {
+    // Displaying message
+    echo $_SESSION['failed-remove'];
+    // removing after showing message once
+    unset($_SESSION['failed-remove']);
+}
 
 ?>
 

@@ -179,7 +179,8 @@ if (isset($_POST['submit'])) {
             ';
 
         // redirect the user to manage category page
-        header("Location: " . SITEURL . "admin/manage-category.php");
+        // header("Location: " . SITEURL . "admin/manage-category.php");
+        header("location: " . SITEURL .  'admin/manage-category.php');
         exit;
     } else {
         // Failed to add Category

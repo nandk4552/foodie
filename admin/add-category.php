@@ -71,7 +71,7 @@ if (isset($_SESSION['upload'])) {
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Select Image </label>
-                    <input type="file" class="form-control" name="image" id="image" aria-label="file example" required>
+                    <input type="file" class="form-control" name="image" id="image" aria-label="file example">
                     <div class="invalid-feedback">Invalid Field</div>
                 </div>
 
@@ -120,35 +120,39 @@ if (isset($_POST['submit'])) {
         // To Upload Image we need the image name, source path and destination path
         $image_name = $_FILES['image']['name'];
 
-        // Auto rename the image
-        $ext = end(explode('.', $image_name));
-
-        // Rename the image
-        $image_name = "Food_Category_".rand(0000,9999).'.'.$ext;
+        // Upload the image only if image is selected 
+        if ($image_name != "") {
 
 
-        $source_path = $_FILES['image']['tmp_name'];
-        $destination_path = "../images/category/" . $image_name;
 
-        // Finally upload the image
-        $upload = move_uploaded_file($source_path, $destination_path);
+            // Auto rename the image
+            $ext = end(explode('.', $image_name));
 
-        // check whether the image is uploaded or not
-        // And if the image is not uploaded then we will stop the process redirect the user with error message
-        if ($upload == false) {
-            // Set sesssion message
-            session_start();
-            $_SESSION['upload'] = '
+            // Rename the image
+            $image_name = "Food_Category_" . rand(0000, 9999) . '.' . $ext;
+
+
+            $source_path = $_FILES['image']['tmp_name'];
+            $destination_path = "../images/category/" . $image_name;
+
+            // Finally upload the image
+            $upload = move_uploaded_file($source_path, $destination_path);
+
+            // check whether the image is uploaded or not
+            // And if the image is not uploaded then we will stop the process redirect the user with error message
+            if ($upload == false) {
+                // Set sesssion message
+                session_start();
+                $_SESSION['upload'] = '
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Error!</strong> Image Failed to Upload.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     ';
-
-            // redirect the user to add category page
-            header("Location: " . SITEURL . "admin/add-category.php");
-            // stop the process
-            exit;
+                // Redirect the user to add category page
+                header("Location: " . SITEURL . "admin/add-category.php");
+                exit;
+            }
         }
     } else {
         // Don't upload the image and set the image_name value as blank
@@ -176,6 +180,7 @@ if (isset($_POST['submit'])) {
 
         // redirect the user to manage category page
         header("Location: " . SITEURL . "admin/manage-category.php");
+        exit;
     } else {
         // Failed to add Category
         session_start();
@@ -188,6 +193,7 @@ if (isset($_POST['submit'])) {
 
         // redirect the user to add category page
         header("Location: " . SITEURL . "admin/add-category.php");
+        exit;
     }
 }
 

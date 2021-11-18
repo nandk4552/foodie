@@ -1,7 +1,9 @@
 <?php
-    include('_dbconnect.php');
-    // to handle login authorize login
-    include('_handleLogin.php');
+include('_dbconnect.php');
+// to handle login authorize login
+include('_handleLogin.php');
+session_start();
+
 ?>
 <!doctype html>
 <html lang="en">

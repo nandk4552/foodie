@@ -25,6 +25,19 @@ if (isset($_SESSION['delete'])) {
     // removing after showing message once
     unset($_SESSION['delete']);
 }
+if (isset($_SESSION['no-category-found'])) {
+    // Displaying message
+    echo $_SESSION['no-category-found'];
+    // removing after showing message once
+    unset($_SESSION['no-category-found']);
+}
+if (isset($_SESSION['update-category'])) {
+    // Displaying message
+    echo $_SESSION['update-category'];
+    // removing after showing message once
+    unset($_SESSION['update-category']);
+}
+
 ?>
 
 
@@ -104,7 +117,7 @@ if (isset($_SESSION['delete'])) {
                             <td><?php echo $featured?></td>
                             <td><?php echo $active?></td>
                             <td>
-                                <a  href="<?php echo SITEURL; ?>admin/update-category.php" class="btn btn-success btn-sm">Update Category</a>
+                                <a  href="<?php echo SITEURL; ?>admin/update-category.php?id=<?php echo $id; ?>" class="btn btn-success btn-sm">Update Category</a>
                                 <a href="<?php echo SITEURL; ?>admin/delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name;?>" class="btn btn-danger btn-sm">Delete Category</a>
                             </td>
                         </tr>

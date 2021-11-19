@@ -56,13 +56,13 @@ session_start();
                         <a class="nav-link" href="manage-order.php">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-light" href="logout.php">Logout</a>
+                        <a class="nav-link btn btn-primary btn-sm ms-3 text-light" href="logout.php">Logout</a>
                     </li>
 
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search Here..." aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
                 </form>
             </div>
         </div>

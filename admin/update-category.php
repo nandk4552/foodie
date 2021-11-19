@@ -213,7 +213,7 @@ if (isset($_POST['submit'])) {
                         <strong>Error!</strong> Failed to remove the current Image.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>   ';
-                    header("location: " . SITEURL .  'admin/manage-category.php');
+                    header("location: " . SITEURL .  "admin/manage-category.php");
                     die();
                 }
             }
@@ -227,6 +227,7 @@ if (isset($_POST['submit'])) {
     // 3. Update the Database
     $sql2 = "UPDATE tbl_category SET
             title = '$title',
+            image_name = '$image_name',
             featured = '$featured',
             active = '$active'
             WHERE id = $id
@@ -261,6 +262,4 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<?php
-include('partials/_footer.php');
-?>
+<?php include('partials/_footer.php'); ?>

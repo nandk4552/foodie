@@ -6,4 +6,3 @@ This is a food order Website Template, designed using html and css and Bootstrap
 2. CSS3
 3. PHP
 4. MySQL
-5. 

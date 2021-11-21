@@ -2,11 +2,20 @@
 include('partials-front/_header.php');
 ?>
 
+<?php
+    if(isset($_SESSION['order'])) {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
+?>
+
+
+
 <!-- fOOD sEARCH Section Starts Here -->
 <section class="food-search text-center">
     <div class="container">
 
-        <form action="food-search.php" method="POST">
+        <form action="" method="POST">
             <input type="search" name="search" placeholder="Search for Food.." required>
             <input type="submit" name="submit" value="Search" class="btn btn-primary">
         </form>
@@ -37,7 +46,7 @@ include('partials-front/_header.php');
                 $title = $row['title'];
                 $image_name = $row['image_name'];
         ?>
-                <a href="category-foods.php">
+                <a href="<?php echo SITEURL; ?>category-foods.php?category_id=<?php echo $id; ?>">
                     <div class="box-3 float-container">
                         <?php
                         // check whether Image is avaiable or not
@@ -132,7 +141,7 @@ include('partials-front/_header.php');
                         </p>
                         <br>
 
-                        <a href="order.php" class="btn btn-primary">Order Now</a>
+                        <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
         <?php

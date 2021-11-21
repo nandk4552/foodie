@@ -25,7 +25,7 @@ include('partials-front/_dbconnect.php');
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <div class="collapse navbar-collapse " id="navbarNav" style="justify-content: flex-end;">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
                         <a class="nav-link active" href="<?php echo SITEURL; ?>">Home</a>

@@ -47,12 +47,12 @@ include('partials/_header.php');
                     ';
 
                     header("Location: " . SITEURL . "admin/manage-category.php");
-                    exit;
+                    die();
                 }
             } else {
                 // redirect to manage category page
                 header("Location: " . SITEURL . "admin/manage-category.php");
-                exit;
+                die();
             }
 
             ?>
@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
             $ext = end(explode('.', $image_name));
 
             // Rename the image
-            $image_name = "Food_Category_" . rand(0000, 9999) . '.' . $ext;
+            $image_name = "Food-Category-" . rand(0000, 9999) . '.' . $ext;
 
 
             $source_path = $_FILES['image']['tmp_name'];
@@ -185,7 +185,6 @@ if (isset($_POST['submit'])) {
             // And if the image is not uploaded then we will stop the process redirect the user with error message
             if ($upload == false) {
                 // Set sesssion message
-                session_start();
                 $_SESSION['upload'] = '
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Error!</strong> Image Failed to Upload.

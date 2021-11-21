@@ -244,12 +244,13 @@ if (isset($_GET['id'])) {
                                 die();
                             }
                         }
+                    } else {
+                        // default image when image is not selected 
+                        $image_name = $current_image;
                     }
-                }
-                else {
-                    print_r($current_image);
-
-                    // $image_name = $current_image;
+                } else {
+                    // default image when button is not clicked
+                    $image_name = $current_image;
                 }
 
 
@@ -270,25 +271,23 @@ if (isset($_GET['id'])) {
 
                 // check whether the query is executed or not
                 // Redirect to Manage Food with Session message
-                if($result3 == true) {
+                if ($result3 == true) {
                     // query executed and food updated
                     $_SESSION['update'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success!</strong> Food Updated Successfully.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>';
-                  header('location:'.SITEURL.'admin/manage-food.php');
-                  die();
-                }
-                else {
+                    header('location:' . SITEURL . 'admin/manage-food.php');
+                    die();
+                } else {
                     // Failed to Update food
                     $_SESSION['update'] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error!</strong> Failed to update food.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>';
-                  header('location:'.SITEURL.'admin/manage-food.php');
-                  die();
+                    header('location:' . SITEURL . 'admin/manage-food.php');
+                    die();
                 }
-
             }
             ?>
 

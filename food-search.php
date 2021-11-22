@@ -7,7 +7,9 @@ include('partials-front/_header.php');
         <?php
 
         // Get the search keyword
-        $search = $_POST['search'];
+        // $search = $_POST['search'];
+        $search = mysqli_real_escape_string($conn ,$_POST['search']);
+
 
         ?>
         <h2>Foods on Your Search <a href="#" class="text-white">"<?php echo $search; ?>"</a></h2>
@@ -23,6 +25,7 @@ include('partials-front/_header.php');
 
         <?php
         // SQL query to Get foods based on search keyword
+        // "S"
         $sql = "SELECT * FROM tbl_food WHERE title LIKE '%$search%' OR '%$search%'";
 
         // Execute the query 
